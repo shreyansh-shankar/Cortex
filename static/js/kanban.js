@@ -1,4 +1,4 @@
-// Make sure SortableJS is included in your HTML:
+// Make sure SortableJS is included in your HTML
 // <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 
 function renderKanbanBoard(project) {
@@ -35,7 +35,7 @@ function renderKanbanBoard(project) {
     const addBtn = document.createElement("button");
     addBtn.className = "kanban-add-task";
     addBtn.textContent = "+ Add Task";
-    addBtn.onclick = () => createNewTask(project, status);
+    addBtn.onclick = () => openTaskModal(project, status); // use modal instead of prompt
 
     // Append header, tasks, add button to column
     column.append(header, taskContainer, addBtn);
@@ -45,7 +45,7 @@ function renderKanbanBoard(project) {
     Sortable.create(taskContainer, {
       group: "kanban",           // allow moving tasks between columns
       animation: 200,            // smooth animation
-      ghostClass: "kanban-ghost",// styling for dragged element
+      ghostClass: "kanban-ghost",
       onAdd: (evt) => updateTaskStatus(evt, project),
       onEnd: (evt) => updateTaskStatus(evt, project)
     });
@@ -54,30 +54,35 @@ function renderKanbanBoard(project) {
   main.appendChild(board);
 }
 
-// --- Create a task card ---
+// --- Create a task card with priority and tags ---
 function createTaskCard(task) {
   const card = document.createElement("div");
   card.className = "kanban-task";
   card.dataset.id = task.task_id;
-  card.textContent = task.title;
+
+  // Task title
+  const title = document.createElement("div");
+  title.className = "task-title";
+  title.textContent = task.title;
+
+  // Priority indicator
+  const priority = document.createElement("div");
+  priority.className = `task-priority priority-${task.priority || 0}`;
+
+  // Tags container
+  const tagsContainer = document.createElement("div");
+  tagsContainer.className = "task-tags";
+  if (task.tags && task.tags.length) {
+    task.tags.forEach(tag => {
+      const t = document.createElement("span");
+      t.className = "task-tag";
+      t.textContent = tag;
+      tagsContainer.appendChild(t);
+    });
+  }
+
+  card.append(title, priority, tagsContainer);
   return card;
-}
-
-// --- Create new task ---
-function createNewTask(project, status) {
-  const title = prompt("Task title:");
-  if (!title) return;
-
-  const newTask = {
-    task_id: crypto.randomUUID(),
-    title,
-    status
-  };
-
-  project.tasks = project.tasks || [];
-  project.tasks.push(newTask);
-  saveProject(project);
-  renderKanbanBoard(project);
 }
 
 // --- Update task status after drag & drop ---
