@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cortex Projects</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/projects.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/projectmodal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/kanban.css') }}">
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="navbar-left">
+            <button id="toggleSidebar" class="sidebar-toggle">☰</button>
+            <h1 class="app-title">Cortex</h1>
+        </div>
+    </header>
+
+    <!-- Page Layout -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <h2 class="sidebar-title">Projects</h2>
+            <div id="projectList" class="project-list"></div>
+            <button id="newProjectBtn" class="new-project-btn">+ New Project</button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div id="mainContent" class="main-text">
+                <h1>Your Projects</h1>
+                <p>Select a project or create a new one to get started.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Project Creation Modal -->
+    <div id="projectModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Create New Project</h2>
+            <form id="projectForm">
+                <label>
+                    Project Name
+                    <input type="text" id="projectName" placeholder="Enter project name" required>
+                </label>
+
+                <label>
+                    Category
+                    <input type="text" id="projectCategory" placeholder="e.g. Development, Marketing, YouTube">
+                </label>
+
+                <label>
+                    Tags (comma separated)
+                    <input type="text" id="projectTags" placeholder="e.g. web, ai, prototype">
+                </label>
+
+                <label>
+                    Status Types
+                    <div id="statusContainer">
+                        <input type="text" value="Not Started">
+                        <input type="text" value="In Progress">
+                        <input type="text" value="Completed">
+                    </div>
+                    <button type="button" id="addStatusBtn">+ Add Status</button>
+                </label>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Create</button>
+                    <button type="button" id="cancelModal" class="btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="{{ url_for('static', filename='js/projects.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/projectmodal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/kanban.js') }}"></script>
+</body>
+
+</html>
