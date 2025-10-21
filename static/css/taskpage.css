@@ -1,0 +1,43 @@
+body {
+    background: #181818;
+    color: #eee;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0 24px;
+}
+
+.task-header {
+    padding: 24px 0 12px 0;
+    border-bottom: 1px solid #333;
+}
+
+.task-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.task-properties {
+    padding: 16px 0;
+    border-bottom: 1px solid #333;
+}
+
+.task-properties .property {
+    margin-bottom: 8px;
+}
+
+.task-content {
+    padding: 16px 0;
+}
+
+#taskMarkdown {
+    width: 100%;
+    min-height: 400px;
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 16px;
+    resize: vertical;
+}

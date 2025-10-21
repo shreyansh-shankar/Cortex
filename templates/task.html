@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/taskpage.css') }}">
+</head>
+<body>
+    <header class="task-header">
+        <h1 id="taskTitle">Task Name</h1>
+    </header>
+
+    <section class="task-properties">
+        <div class="property">
+            <strong>Status:</strong> <span id="taskStatus"></span>
+        </div>
+        <div class="property">
+            <strong>Tags:</strong> <span id="taskTags"></span>
+        </div>
+        <!-- Add more properties here if needed -->
+    </section>
+
+    <section class="task-content">
+        <textarea id="taskMarkdown" placeholder="Write your notes here..."></textarea>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/taskpage.js') }}"></script>
+</body>
+</html>

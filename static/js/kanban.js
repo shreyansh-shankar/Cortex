@@ -81,6 +81,11 @@ function createTaskCard(task) {
     });
   }
 
+  // Make the task card clickable
+  card.addEventListener("click", (e) => {
+    window.open(`/task?taskId=${task.task_id}`, "_blank");
+  });
+
   card.append(title, priority, tagsContainer);
   return card;
 }
